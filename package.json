@@ -1,10 +1,10 @@
 {
-  "name": "koa-compose",
-  "description": "compose Koa middleware",
-  "repository": "koajs/compose",
+  "name": "parrot-compose",
+  "description": "compose parrot middleware",
+  "repository": "rockq-org/parrot-compose",
   "version": "2.4.0",
   "keywords": [
-    "koa",
+    "parrot",
     "middleware",
     "compose"
   ],
