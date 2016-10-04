@@ -1,27 +1,22 @@
 {
-  "name": "parrot-compose",
-  "description": "compose parrot middleware",
-  "repository": "rockq-org/parrot-compose",
-  "version": "2.4.0",
+  "name": "microloom",
+  "description": "compose generator as middleware",
+  "repository": "Samurais/microloom",
+  "version": "1.0.0",
   "keywords": [
-    "parrot",
     "middleware",
     "compose"
   ],
   "files": [
     "index.js"
   ],
-  "dependencies": {},
-  "devDependencies": {
-    "co": "^3.0.0",
-    "istanbul": "^0.4.2",
-    "mocha": "^2.4.5",
-    "should": "^2.0.0"
+  "dependencies": {
+    "ava": "^0.16.0",
+    "q": "^1.4.1"
   },
+  "devDependencies": {},
   "scripts": {
-    "test": "mocha --harmony --require should --reporter spec",
-    "test-cov": "node --harmony ./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha -- --require should",
-    "test-travis": "node --harmony ./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha --report lcovonly -- --require should"
+    "test": "ava"
   },
   "license": "MIT"
 }
