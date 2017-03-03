@@ -1,20 +1,25 @@
 {
-    "name": "microloom",
-    "description": "compose generator as middleware",
-    "repository": "Samurais/microloom",
-    "version": "1.0.3",
-    "keywords": [
-        "middleware",
-        "compose"
-    ],
-    "main": "index.js",
-    "dependencies": {
-        "ava": "^0.16.0",
-        "q": "^1.4.1"
-    },
-    "devDependencies": {},
-    "scripts": {
-        "test": "ava"
-    },
-    "license": "MIT"
+  "name": "microloom",
+  "description": "compose generator as middleware with async/await.",
+  "repository": "Samurais/microloom",
+  "version": "4.0.0",
+  "keywords": [
+    "middleware",
+    "compose"
+  ],
+  "main": "index.js",
+  "dependencies": {
+    "co": "^4.6.0",
+    "koa-compose": "^3.2.1"
+  },
+  "devDependencies": {
+    "ava": "^0.16.0"
+  },
+  "scripts": {
+    "test": "ava"
+  },
+  "engines": {
+    "node": ">= 7.6"
+  },
+  "license": "MIT"
 }

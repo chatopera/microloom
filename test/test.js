@@ -5,25 +5,34 @@
 const test = require('ava');
 const app = require('../index');
 
-test.cb('Microloom#app', t => {
-    app.use(function*(next) {
-        console.log('mw1', this);
-        this.name = 'bar';
+function wait(ms) {
+    return new Promise((resolve) => setTimeout(resolve, ms || 1))
+}
+
+test.cb('Microloom#yield', t => {
+    app.use(function* (ctx, next) {
+        ctx.arr.push(1)
+        yield next()
+        yield wait(1)
+        ctx.arr.push(4)
+        return ctx;
     });
 
-    app.use(function*(next) {
-        console.log('mw2', this);
+    app.use(function* (ctx, next) {
+        ctx.arr.push(2)
+        yield next()
+        ctx.arr.push(3)
     });
 
     app.handle({
-        a: 'b'
-    }).then(function(result) {
+        arr: [0]
+    }).then(function (result) {
         console.log(result);
-        t.is(result.session.a, 'b', 'context does not match');
-        t.is(result.name, 'bar', 'response does not match');
+        t.is(result.arr[0], 0, 'arr[0] does not match');
+        t.is(result.arr[1], 1, 'arr[1] does not match');
         t.pass();
-    }).fin(function() {
-        console.log('fin');
         t.end();
+    }).catch(function (e) {
+        console.error(e)
     });
 });

@@ -2,9 +2,8 @@
 /**
  * Application for dialog system.
  */
-const compose = require('./lib/compose');
-const co = require('./lib/co3');
-const Q = require('q');
+const compose = require('koa-compose');
+const co = require('co');
 
 function Microloom() {
     this.middleware = [];
@@ -15,7 +14,7 @@ function Microloom() {
  * @param  {[type]} middleware [description]
  * @return {[type]}            [description]
  */
-Microloom.prototype.use = function(middleware) {
+Microloom.prototype.use = function (middleware) {
     this.middleware.push(middleware);
 };
 
@@ -23,16 +22,8 @@ Microloom.prototype.use = function(middleware) {
  * Handle Request
  * @return {[type]} [description]
  */
-Microloom.prototype.handle = function(session) {
-    let defer = new Q.defer();
-    let ctx = { session: session };
-    co(compose(this.middleware))
-        .call(ctx, function(err, val) {
-            if (err)
-                return defer.reject(err);
-            defer.resolve(ctx);
-        });
-    return defer.promise;
+Microloom.prototype.handle = function (session) {
+    return compose(this.middleware.map((fn) => co.wrap(fn)))(session);
 }
 
 exports = module.exports = new Microloom();
