@@ -11,27 +11,36 @@ npm install microloom --save
 Check out [Example](https://github.com/Samurais/microloom/tree/master/test/test.js).
 
 ```
-    app.use(async function (ctx, next) {
-        ctx.arr.push(1)
-        await next()
-        await wait(1)
-        ctx.arr.push(4)
-        return ctx;
-    });
+// simulate a request.
+function wait(ms) {
+    return new Promise((resolve) => setTimeout(resolve, ms || 1))
+}
 
-    app.use(async function (ctx, next) {
-        ctx.arr.push(2)
-        await next()
-        ctx.arr.push(3)
-    });
+let app = require('microloom');
+app.use(async function (ctx, next) {
+    ctx.arr.push(1)
+    await next()
+    // process requests with Promise, Generator, Async or any object.
+    await wait(1)
+    ctx.arr.push(4)
+    return ctx;
+});
 
-    app.handle({
-        arr: [0]
-    }).then(function (result) {
-        console.log(result);
-    }).catch(function (e) {
-        console.error(e)
-    });
+app.use(async function (ctx, next) {
+    ctx.arr.push(2)
+    await next()
+    ctx.arr.push(3)
+});
+
+app.handle({ /* Inject ctx value */
+    arr: [0]
+}).then(function (result) {
+    console.log(result);
+    // { arr: [ 0, 1, 2, 3, 4 ] }
+}).catch(function (e) {
+    console.error(e)
+});
+
 ```
 
 ## Contribution
