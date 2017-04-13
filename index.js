@@ -26,4 +26,4 @@ Microloom.prototype.handle = function (session) {
     return compose(this.middleware.map((fn) => co.wrap(fn)))(session);
 }
 
-exports = module.exports = new Microloom();
+exports = module.exports = Microloom;

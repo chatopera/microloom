@@ -2,7 +2,7 @@
   "name": "microloom",
   "description": "compose generator as middleware with async/await.",
   "repository": "Samurais/microloom",
-  "version": "4.0.3",
+  "version": "5.0.0",
   "keywords": [
     "middleware",
     "compose"

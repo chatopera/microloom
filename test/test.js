@@ -3,7 +3,8 @@
  * secure requests for API calls.
  */
 const test = require('ava');
-const app = require('../index');
+const Microloom = require('../index');
+const app = new Microloom();
 
 function wait(ms) {
     return new Promise((resolve) => setTimeout(resolve, ms || 1))
